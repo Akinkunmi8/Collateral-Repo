@@ -1,0 +1,64 @@
+name: collateral-portal
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: collateral-sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "YourStrong!Passw0rd"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      retries: 10
+      start_period: 20s
+
+  # Metadata store required by the Azure Service Bus emulator (Microsoft SQL
+  # Edge, per the official emulator docs). Separate from the app's own DB above.
+  servicebus-sql-edge:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    container_name: collateral-servicebus-sql-edge
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "YourStrong!Passw0rd"
+
+  servicebus-emulator:
+    image: mcr.microsoft.com/azure-messaging/servicebus-emulator:latest
+    container_name: collateral-servicebus-emulator
+    depends_on:
+      - servicebus-sql-edge
+    environment:
+      ACCEPT_EULA: "Y"
+      SQL_SERVER: servicebus-sql-edge
+      MSSQL_SA_PASSWORD: "YourStrong!Passw0rd"
+    ports:
+      - "5672:5672"   # AMQP
+      - "5300:5300"   # emulator config/admin port
+    volumes:
+      - ./docker/servicebus-emulator/config.json:/ServiceBus_Emulator/ConfigFiles/Config.json
+
+  api:
+    build:
+      context: .
+      dockerfile: src/CollateralPortal.Api/Dockerfile
+    container_name: collateral-api
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      servicebus-emulator:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://+:8080"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=CollateralPortal;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True"
+      ServiceBus__ConnectionString: "Endpoint=sb://servicebus-emulator;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true"
+    ports:
+      - "5080:8080"
+
+volumes:
+  sqlserver-data:
