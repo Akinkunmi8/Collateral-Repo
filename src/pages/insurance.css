@@ -1,0 +1,193 @@
+.insurance-page {
+    padding: 28px;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.insurance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+    .insurance-header h1 {
+        margin: 0 0 6px;
+        font-size: 28px;
+        color: #101828;
+    }
+
+    .insurance-header p {
+        margin: 0;
+        color: #667085;
+    }
+
+.insurance-count {
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #f2f4f7;
+    color: #344054;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.insurance-toolbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+    .insurance-toolbar input,
+    .insurance-toolbar select {
+        height: 42px;
+        border: 1px solid #d0d5dd;
+        border-radius: 8px;
+        background: #fff;
+        padding: 0 12px;
+        font: inherit;
+        outline: none;
+    }
+
+    .insurance-toolbar input {
+        flex: 1;
+    }
+
+    .insurance-toolbar select {
+        min-width: 160px;
+    }
+
+.insurance-table-card {
+    background: #fff;
+    border: 1px solid #eaecf0;
+    border-radius: 12px;
+    overflow-x: auto;
+}
+
+.insurance-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .insurance-table th {
+        background: #f9fafb;
+        color: #475467;
+        font-size: 12px;
+        text-align: left;
+        padding: 12px 16px;
+        border-bottom: 1px solid #eaecf0;
+    }
+
+    .insurance-table td {
+        padding: 16px;
+        border-bottom: 1px solid #eaecf0;
+        font-size: 13px;
+        color: #344054;
+        vertical-align: middle;
+    }
+
+    .insurance-table tbody tr:hover {
+        background: #fcfcfd;
+    }
+
+    .insurance-table td small {
+        display: block;
+        margin-top: 6px;
+        color: #667085;
+    }
+
+.insurance-status {
+    display: inline-flex;
+    padding: 5px 9px;
+    border-radius: 999px;
+    background: #eef4ff;
+    color: #3538cd;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.insurance-tat-within,
+.insurance-tat-beyond {
+    display: inline-flex;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.insurance-tat-within {
+    background: #ecfdf3;
+    color: #067647;
+}
+
+.insurance-tat-beyond {
+    background: #fef3f2;
+    color: #b42318;
+}
+
+.insurance-review-btn {
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    background: #fff;
+    padding: 8px 13px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+    .insurance-review-btn:hover {
+        background: #f9fafb;
+    }
+
+.insurance-error {
+    margin-bottom: 16px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: #fef3f2;
+    color: #b42318;
+}
+
+.insurance-pagination {
+    margin-top: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #667085;
+    font-size: 13px;
+}
+
+    .insurance-pagination > div {
+        display: flex;
+        gap: 8px;
+    }
+
+    .insurance-pagination button {
+        border: 1px solid #d0d5dd;
+        border-radius: 8px;
+        background: #fff;
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+        .insurance-pagination button:disabled {
+            opacity: .45;
+            cursor: not-allowed;
+        }
+
+@media (max-width: 800px) {
+
+    .insurance-page {
+        padding: 18px;
+    }
+
+    .insurance-header,
+    .insurance-toolbar,
+    .insurance-pagination {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+        .insurance-toolbar input,
+        .insurance-toolbar select {
+            width: 100%;
+            box-sizing: border-box;
+        }
+}

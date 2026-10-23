@@ -1,0 +1,835 @@
+/* =========================================================
+   VALUATION WORK QUEUE
+   Corporate banking dashboard
+   ========================================================= */
+
+.valuation-page {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 34px 32px;
+    font-family: inherit;
+    color: #0f1f3d;
+}
+
+/* ---------------- HEADER ---------------- */
+
+.valuation-page-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 26px;
+}
+
+.page-eyebrow {
+    margin: 0 0 8px;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.valuation-page-header h1 {
+    margin: 0;
+    color: #0f1f3d;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.page-description {
+    margin: 9px 0 0;
+    color: #718096;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* ---------------- COUNT CARD ---------------- */
+
+.queue-count {
+    min-width: 170px;
+    padding: 14px 18px;
+    box-sizing: border-box;
+    border: 1px solid #dfe6ef;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 3px 10px rgba(15, 31, 61, 0.04);
+}
+
+    .queue-count span {
+        display: block;
+        color: #718096;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .queue-count strong {
+        display: block;
+        margin-top: 3px;
+        color: #0f1f3d;
+        font-size: 25px;
+        font-weight: 700;
+    }
+
+/* ---------------- MAIN CARD ---------------- */
+
+.valuation-card {
+    overflow: hidden;
+    border: 1px solid #dfe6ef;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 5px 18px rgba(15, 31, 61, 0.045);
+}
+
+/* ---------------- TOOLBAR ---------------- */
+
+.queue-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #e8edf4;
+    background: #ffffff;
+}
+
+.queue-search {
+    display: flex;
+    align-items: center;
+    width: min(560px, 100%);
+    gap: 10px;
+}
+
+    .queue-search input {
+        width: 100%;
+        height: 40px;
+        box-sizing: border-box;
+        padding: 0 13px;
+        border: 1px solid #d5dde8;
+        border-radius: 7px;
+        background: #ffffff;
+        color: #17233c;
+        font-family: inherit;
+        font-size: 13px;
+        outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .queue-search input::placeholder {
+            color: #9aa8bb;
+        }
+
+        .queue-search input:focus {
+            border-color: #3267e8;
+            box-shadow: 0 0 0 3px rgba(50, 103, 232, 0.09);
+        }
+
+    .queue-search button {
+        height: 40px;
+        padding: 0 19px;
+        border: 0;
+        border-radius: 7px;
+        background: #3267e8;
+        color: #ffffff;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s ease;
+    }
+
+        .queue-search button:hover {
+            background: #2858cc;
+        }
+
+.clear-filter {
+    border: 0;
+    background: transparent;
+    color: #3267e8;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* =========================================================
+   Valuation queue tabs
+   ========================================================= */
+
+.valuation-tabs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 18px 0;
+    border-bottom: 1px solid #e5eaf2;
+}
+
+.valuation-tab {
+    position: relative;
+    border: 0;
+    background: transparent;
+    padding: 13px 18px 16px;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+    .valuation-tab:hover {
+        color: #1f4ed8;
+    }
+
+    .valuation-tab.active {
+        color: #1f4ed8;
+    }
+
+        .valuation-tab.active::after {
+            content: "";
+            position: absolute;
+            left: 16px;
+            right: 16px;
+            bottom: -1px;
+            height: 3px;
+            border-radius: 3px 3px 0 0;
+            background: #1f4ed8;
+        }
+
+
+/* =========================================================
+   Additional information status
+   ========================================================= */
+
+.status-information-requested {
+    background: #fff7ed;
+    color: #c2410c;
+    border: 1px solid #fed7aa;
+}
+
+
+/* =========================================================
+   Resubmit button
+   ========================================================= */
+
+.resubmit-valuation-button {
+    min-width: 100px;
+    border: 1px solid #b8c8e8;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #1f4ed8;
+    padding: 9px 13px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+
+    .resubmit-valuation-button:hover {
+        background: #f4f7ff;
+        border-color: #7f9fe0;
+    }
+
+    .resubmit-valuation-button:active {
+        transform: translateY(1px);
+    }
+
+
+/* =========================================================
+   Success message
+   ========================================================= */
+
+.valuation-success {
+    margin: 18px;
+    padding: 13px 16px;
+    border: 1px solid #bbf7d0;
+    border-radius: 9px;
+    background: #f0fdf4;
+    color: #166534;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   Resubmit modal
+   ========================================================= */
+
+.valuation-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(9, 22, 45, 0.58);
+    backdrop-filter: blur(2px);
+}
+
+.valuation-modal {
+    width: min(620px, 100%);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22), 0 4px 14px rgba(15, 23, 42, 0.12);
+}
+
+.valuation-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px 26px 20px;
+    border-bottom: 1px solid #e7ecf4;
+}
+
+.valuation-modal-eyebrow {
+    display: block;
+    margin-bottom: 5px;
+    color: #6b7f9f;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.valuation-modal-header h2 {
+    margin: 0;
+    color: #0d2344;
+    font-size: 22px;
+    line-height: 1.3;
+}
+
+.valuation-modal-close {
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 8px;
+    background: #f3f6fa;
+    color: #52647f;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+    .valuation-modal-close:hover {
+        background: #e9eef6;
+    }
+
+.valuation-modal-body {
+    padding: 24px 26px;
+}
+
+.resubmit-record {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+    .resubmit-record > div {
+        min-width: 0;
+        padding: 13px 14px;
+        border: 1px solid #e1e8f2;
+        border-radius: 10px;
+        background: #f8fafc;
+    }
+
+    .resubmit-record span {
+        display: block;
+        margin-bottom: 5px;
+        color: #7b8ba5;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .resubmit-record strong {
+        display: block;
+        overflow: hidden;
+        color: #102442;
+        font-size: 13px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+.resubmit-description {
+    margin: 0 0 20px;
+    color: #5f718d;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.resubmit-field {
+    display: block;
+}
+
+    .resubmit-field > span {
+        display: block;
+        margin-bottom: 8px;
+        color: #1d3557;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .resubmit-field textarea {
+        width: 100%;
+        min-height: 125px;
+        resize: vertical;
+        box-sizing: border-box;
+        border: 1px solid #ccd7e6;
+        border-radius: 10px;
+        outline: none;
+        background: #ffffff;
+        padding: 13px 14px;
+        color: #172b4d;
+        font: inherit;
+        font-size: 14px;
+        line-height: 1.55;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .resubmit-field textarea:focus {
+            border-color: #4977df;
+            box-shadow: 0 0 0 3px rgba(73, 119, 223, 0.12);
+        }
+
+    .resubmit-field small {
+        display: block;
+        margin-top: 6px;
+        color: #8a99af;
+        font-size: 11px;
+        text-align: right;
+    }
+
+.valuation-modal-error {
+    margin-top: 14px;
+    padding: 11px 13px;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    background: #fef2f2;
+    color: #b42318;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.valuation-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 18px 26px 24px;
+    border-top: 1px solid #e7ecf4;
+}
+
+.modal-cancel-button,
+.modal-submit-button {
+    min-height: 42px;
+    border-radius: 9px;
+    padding: 0 18px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.modal-cancel-button {
+    border: 1px solid #ced8e6;
+    background: #ffffff;
+    color: #52647f;
+}
+
+.modal-submit-button {
+    border: 1px solid #3164d9;
+    background: #3164d9;
+    color: #ffffff;
+    box-shadow: 0 7px 18px rgba(49, 100, 217, 0.18);
+}
+
+    .modal-submit-button:hover:not(:disabled) {
+        background: #2857c3;
+    }
+
+    .modal-submit-button:disabled,
+    .modal-cancel-button:disabled,
+    .valuation-modal-close:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+@media (max-width: 720px) {
+    .valuation-tabs {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .valuation-tab {
+        text-align: left;
+    }
+
+        .valuation-tab.active::after {
+            left: 0;
+            right: auto;
+            top: 8px;
+            bottom: 8px;
+            width: 3px;
+            height: auto;
+        }
+
+    .resubmit-record {
+        grid-template-columns: 1fr;
+    }
+
+    .valuation-modal-footer {
+        flex-direction: column-reverse;
+    }
+
+    .modal-cancel-button,
+    .modal-submit-button {
+        width: 100%;
+    }
+}
+/* ---------------- TABLE ---------------- */
+
+.table-responsive {
+    width: 100%;
+    overflow: hidden;
+}
+
+.valuation-table {
+    width: 100%;
+    min-width: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: #ffffff;
+}
+
+    .valuation-table thead {
+        background: #f8fafc;
+    }
+
+    .valuation-table th,
+    .valuation-table td {
+        box-sizing: border-box;
+    }
+
+    .valuation-table th {
+        padding: 12px 14px;
+        border-bottom: 1px solid #e6ebf2;
+        color: #65758b;
+        text-align: left;
+        font-size: 10.5px;
+        font-weight: 700;
+        line-height: 1.3;
+        text-transform: uppercase;
+        letter-spacing: 0.035em;
+        white-space: nowrap;
+    }
+
+    .valuation-table td {
+        padding: 16px 14px;
+        border-bottom: 1px solid #edf1f6;
+        color: #334155;
+        vertical-align: middle;
+        font-size: 12.5px;
+        line-height: 1.45;
+    }
+
+    .valuation-table tbody tr {
+        transition: background 0.15s ease;
+    }
+
+        .valuation-table tbody tr:hover {
+            background: #fafcff;
+        }
+
+        .valuation-table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+    /* Loan / Customer */
+    .valuation-table th:nth-child(1),
+    .valuation-table td:nth-child(1) {
+        width: 17%;
+    }
+
+    /* Collateral */
+    .valuation-table th:nth-child(2),
+    .valuation-table td:nth-child(2) {
+        width: 23%;
+    }
+
+    /* Approved Limit */
+    .valuation-table th:nth-child(3),
+    .valuation-table td:nth-child(3) {
+        width: 14%;
+    }
+
+    /* Location */
+    .valuation-table th:nth-child(4),
+    .valuation-table td:nth-child(4) {
+        width: 12%;
+    }
+
+    /* TAT */
+    .valuation-table th:nth-child(5),
+    .valuation-table td:nth-child(5) {
+        width: 14%;
+    }
+
+    /* Status */
+    .valuation-table th:nth-child(6),
+    .valuation-table td:nth-child(6) {
+        width: 9%;
+    }
+
+    /* Action */
+    .valuation-table th:nth-child(7),
+    .valuation-table td:nth-child(7) {
+        width: 11%;
+    }
+
+    /* ---------------- CELL TYPOGRAPHY ---------------- */
+
+    .valuation-table td strong {
+        display: block;
+        margin: 0;
+        color: #15223b;
+        font-size: 12.5px;
+        font-weight: 650;
+        overflow-wrap: anywhere;
+    }
+
+    .valuation-table td span {
+        display: block;
+        margin-top: 3px;
+        color: #5f6f85;
+        font-size: 11.5px;
+        overflow-wrap: anywhere;
+    }
+
+    .valuation-table td small {
+        display: block;
+        margin-top: 3px;
+        color: #8a98ab;
+        font-size: 10.5px;
+        line-height: 1.4;
+    }
+
+    /* Keep long collateral description controlled */
+
+    .valuation-table td:nth-child(2) span {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    /* Keep status/action centred vertically */
+
+    .valuation-table td:nth-child(6),
+    .valuation-table td:nth-child(7) {
+        vertical-align: middle;
+    }
+/* ---------------- TAT ---------------- */
+
+.tat-badge {
+    display: inline-flex !important;
+    align-items: center;
+    width: fit-content;
+    margin: 0 0 5px !important;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 10px !important;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.tat-within {
+    background: #eaf8f1;
+    color: #16845b !important;
+}
+
+.tat-beyond {
+    background: #fff0f0;
+    color: #d63a3a !important;
+}
+
+/* ---------------- STATUS ---------------- */
+
+.status-badge {
+    display: inline-flex !important;
+    align-items: center;
+    width: fit-content;
+    margin: 0 !important;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: #edf4ff;
+    color: #3267e8 !important;
+    font-size: 10px !important;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* ---------------- VIEW BUTTON ---------------- */
+
+.view-valuation-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 7px 9px;
+    border: 1px solid #d5dfef;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #3267e8;
+    font-size: 10.5px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+    .view-valuation-button:hover {
+        border-color: #3267e8;
+        background: #3267e8;
+        color: #ffffff;
+    }
+
+/* ---------------- PAGINATION ---------------- */
+
+.queue-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 14px 20px;
+    border-top: 1px solid #e8edf4;
+    background: #fbfcfe;
+}
+
+    .queue-pagination > span {
+        color: #718096;
+        font-size: 12px;
+    }
+
+    .queue-pagination > div {
+        display: flex;
+        gap: 7px;
+    }
+
+    .queue-pagination button {
+        min-width: 76px;
+        height: 34px;
+        padding: 0 13px;
+        border: 1px solid #d6deea;
+        border-radius: 6px;
+        background: #ffffff;
+        color: #334155;
+        font-family: inherit;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+        .queue-pagination button:hover:not(:disabled) {
+            border-color: #3267e8;
+            color: #3267e8;
+        }
+
+        .queue-pagination button:disabled {
+            background: #f4f6f8;
+            color: #a7b1bf;
+            cursor: not-allowed;
+        }
+
+/* ---------------- STATES ---------------- */
+
+.valuation-loading,
+.valuation-empty {
+    padding: 55px 24px;
+    text-align: center;
+}
+
+.valuation-loading {
+    color: #718096;
+    font-size: 13px;
+}
+
+.valuation-empty h3 {
+    margin: 0;
+    color: #17233c;
+    font-size: 16px;
+    font-weight: 650;
+}
+
+.valuation-empty p {
+    margin: 7px 0 0;
+    color: #8491a3;
+    font-size: 13px;
+}
+
+.valuation-error {
+    margin: 16px 20px 0;
+    padding: 11px 13px;
+    border: 1px solid #fecaca;
+    border-radius: 7px;
+    background: #fff5f5;
+    color: #b42318;
+    font-size: 12px;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media (max-width: 1100px) {
+    .valuation-page {
+        padding: 28px;
+    }
+
+    .valuation-page-header {
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 760px) {
+    .valuation-page {
+        padding: 20px 16px;
+    }
+
+    .valuation-page-header {
+        flex-direction: column;
+    }
+
+    .queue-count {
+        width: 100%;
+    }
+
+    .queue-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .queue-search {
+        width: 100%;
+    }
+
+    .queue-pagination {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 1200px) {
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .valuation-table {
+        min-width: 900px;
+    }
+}
